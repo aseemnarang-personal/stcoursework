@@ -73,6 +73,7 @@ public class StringUtils {
             ArrayList<Integer> startingPoints = new ArrayList<>();
             ArrayList<Integer> endingPoints = new ArrayList<>();
             boolean start = true;
+            //for (int i = 1; i < sbInput.length(); i++) - 5th  MUTATION
             for (int i = 0; i < sbInput.length(); i++){
                 Character currentChar = sbInput.charAt(i);
                 if(Character.compare(delimiter, currentChar) == 0){
@@ -83,6 +84,7 @@ public class StringUtils {
                     else{
                         endingPoints.add(i);
                         start = true;
+                        //remove above statement - 6 MUTATION
                     }
                 }
             }
