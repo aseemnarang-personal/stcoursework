@@ -1,13 +1,9 @@
+/**
+ * Created by s1338673 on 19/03/16.
+ */
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.*;
 
 public class StringUtils {
-
-    public static void main(String[] args){
-	
-
-    }
 
     private static volatile char escape = 'e';
 
@@ -217,4 +213,16 @@ public class StringUtils {
         return ((str == null) || (str.isEmpty()));
     }
 
+    public static void main(String[] args)
+    {
+        String input = "Chris James Campbell";
+        String pattern = "Campbe";
+        String replace = "Dod";
+        char delimiter = ' ';
+        boolean inside = false;
+
+        System.out.format("The replaced string is: %s\n", replaceString(input, pattern, replace, delimiter, inside));
+    }
 }
+
+
