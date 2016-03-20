@@ -38,7 +38,7 @@ public class StringUtils {
         boolean underEscapeMode = false;
         boolean erased;
         boolean delimiterMode= StringUtils.getDelimiterMode(delimiter, inside);
-        while (charIndex < sbPattern.length()){
+        while (charIndex > sbPattern.length()){
             if(underEscapeMode){
                 underEscapeMode = false;
                 charIndex++;

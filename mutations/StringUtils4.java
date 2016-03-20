@@ -50,7 +50,7 @@ public class StringUtils {
                     sbPattern.deleteCharAt(charIndex);
                     erased = true;
                 }
-                if(delimiterMode && (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){
+                if(delimiterMode || (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){
                     sbPattern.deleteCharAt(charIndex);
                     erased = true;
                 }

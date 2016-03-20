@@ -34,7 +34,7 @@ public class StringUtils {
             replacement = "";
         }
 
-        int charIndex = 0;
+        int charIndex = 1;
         boolean underEscapeMode = false;
         boolean erased;
         boolean delimiterMode= StringUtils.getDelimiterMode(delimiter, inside);

@@ -2,16 +2,33 @@
 
 \usepackage{listings}
 
+\lstset{numbers=left,numberblanklines=false,escapeinside=||,mathescape=true,language=Java,breaklines=true}
+\let\origthelstnumber\thelstnumber
+\makeatletter
+\newcommand*\Suppressnumber{%
+  \lst@AddToHook{OnNewLine}{%
+    \let\thelstnumber\relax%
+     \advance\c@lstnumber-\@ne\relax%
+    }%
+}
+
+\newcommand*\Reactivatenumber{%
+  \lst@AddToHook{OnNewLine}{%
+   \let\thelstnumber\origthelstnumber%
+   \advance\c@lstnumber\@ne\relax}%
+}
+
+
+\makeatother
+
 \begin{document}
 
 \title{Mutations of StringUtils}
 \date{}
 \maketitle
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.*;
 
 public class StringUtils {
 
@@ -45,11 +62,16 @@ public class StringUtils {
             replacement = "";
         }
 
-        int charIndex = 0;
+        int charIndex = 0;|\Suppressnumber|
+        $\displaystyle \textbf{1}\;\Delta\;$int charIndex = 1;
+        
+        |\Reactivatenumber|
         boolean underEscapeMode = false;
         boolean erased;
         boolean delimiterMode= StringUtils.getDelimiterMode(delimiter, inside);
         while (charIndex < sbPattern.length()){
+        $\displaystyle \textbf{2}\;\Delta\;$ while (charIndex <= sbPattern.length()){
+        $\displaystyle \textbf{3}\;\Delta\;$ while (charIndex > sbPattern.length()){
             if(underEscapeMode){
                 underEscapeMode = false;
                 charIndex++;
@@ -62,6 +84,7 @@ public class StringUtils {
                     erased = true;
                 }
                 if(delimiterMode && (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){
+                $\displaystyle \textbf{4}\;\Delta\;$ if(delimiterMode $\displaystyle ||$ (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){
                     sbPattern.deleteCharAt(charIndex);
                     erased = true;
                 }
