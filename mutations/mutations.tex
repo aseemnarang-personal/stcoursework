@@ -69,9 +69,8 @@ public class StringUtils {
         boolean underEscapeMode = false;
         boolean erased;
         boolean delimiterMode= StringUtils.getDelimiterMode(delimiter, inside);
-        while (charIndex < sbPattern.length()){
-        $\displaystyle \textbf{2}\;\Delta\;$ while (charIndex <= sbPattern.length()){
-        $\displaystyle \textbf{3}\;\Delta\;$ while (charIndex > sbPattern.length()){
+        while (charIndex < sbPattern.length()){|\Suppressnumber|
+        $\displaystyle \textbf{2}\;\Delta\;$ while (charIndex <= sbPattern.length()){|\Reactivatenumber|
             if(underEscapeMode){
                 underEscapeMode = false;
                 charIndex++;
@@ -83,8 +82,8 @@ public class StringUtils {
                     sbPattern.deleteCharAt(charIndex);
                     erased = true;
                 }
-                if(delimiterMode && (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){
-                $\displaystyle \textbf{4}\;\Delta\;$ if(delimiterMode $\displaystyle ||$ (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){
+                if(delimiterMode && (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){|\Suppressnumber|
+                $\displaystyle \textbf{3}\;\Delta\;$ if(delimiterMode $\displaystyle ||$ (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){|\Reactivatenumber|
                     sbPattern.deleteCharAt(charIndex);
                     erased = true;
                 }
@@ -141,7 +140,8 @@ public class StringUtils {
                 int oldLen;
                 if(inside){
                     for (int i=0; i<startingPoints.size(); i++){
-                        if(startingPoints.get(i)+1 < endingPoints.get(i)){
+                        if(startingPoints.get(i)+1 < endingPoints.get(i)){|\Suppressnumber|
+                        $\displaystyle \textbf{4}\;\Delta\;$ if(startingPoints.get(i)+1 <= endingPoints.get(i)){|\Reactivatenumber|
                             oldLen = sbInput.length();
                             if(doMatch(sbInput, sbPattern,replacement,startingPoints.get(i)+1, endingPoints.get(i))){
                                 replaceDone = true;
