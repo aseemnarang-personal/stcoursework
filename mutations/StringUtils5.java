@@ -70,7 +70,7 @@ public class StringUtils {
             ArrayList<Integer> startingPoints = new ArrayList<>();
             ArrayList<Integer> endingPoints = new ArrayList<>();
             boolean start = true;
-            for (int i = 0; i < sbInput.length(); i++){
+            for (int i = 1; i < sbInput.length(); i++){
                 Character currentChar = sbInput.charAt(i);
                 if(Character.compare(delimiter, currentChar) == 0){
                     if(start) {

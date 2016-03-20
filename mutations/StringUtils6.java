@@ -79,7 +79,6 @@ public class StringUtils {
                     }
                     else{
                         endingPoints.add(i);
-                        start = true;
                     }
                 }
             }
