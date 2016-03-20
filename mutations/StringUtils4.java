@@ -38,7 +38,7 @@ public class StringUtils {
         boolean underEscapeMode = false;
         boolean erased;
         boolean delimiterMode= StringUtils.getDelimiterMode(delimiter, inside);
-        while (charIndex < sbPattern.length()){
+        while (charIndex > sbPattern.length()){
             if(underEscapeMode){
                 underEscapeMode = false;
                 charIndex++;
@@ -50,7 +50,7 @@ public class StringUtils {
                     sbPattern.deleteCharAt(charIndex);
                     erased = true;
                 }
-                if(delimiterMode || (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){
+                if(delimiterMode && (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){
                     sbPattern.deleteCharAt(charIndex);
                     erased = true;
                 }
@@ -107,7 +107,7 @@ public class StringUtils {
                 int oldLen;
                 if(inside){
                     for (int i=0; i<startingPoints.size(); i++){
-                        if(startingPoints.get(i)+1 < endingPoints.get(i)){
+                        if(startingPoints.get(i)+1 <= endingPoints.get(i)){
                             oldLen = sbInput.length();
                             if(doMatch(sbInput, sbPattern,replacement,startingPoints.get(i)+1, endingPoints.get(i))){
                                 replaceDone = true;
