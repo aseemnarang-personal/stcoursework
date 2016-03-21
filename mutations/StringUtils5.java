@@ -1,41 +1,6 @@
-\documentclass{article}
-
-\usepackage{listings}
-
-\lstset{numbers=left,numberblanklines=false,escapeinside=||,mathescape=true,language=Java,breaklines=true}
-\let\origthelstnumber\thelstnumber
-\makeatletter
-\newcommand*\Suppressnumber{%
-  \lst@AddToHook{OnNewLine}{%
-    \let\thelstnumber\relax%
-     \advance\c@lstnumber-\@ne\relax%
-    }%
-}
-
-\newcommand*\Reactivatenumber{%
-  \lst@AddToHook{OnNewLine}{%
-   \let\thelstnumber\origthelstnumber%
-   \advance\c@lstnumber\@ne\relax}%
-}
-
-
-\makeatother
-
-\begin{document}
-
-\title{Mutations of StringUtils}
-\date{}
-\maketitle
-
-\begin{lstlisting}
 import java.util.ArrayList;
 
 public class StringUtils {
-
-    public static void main(String[] args){
-	
-
-    }
 
     private static volatile char escape = 'e';
 
@@ -62,15 +27,11 @@ public class StringUtils {
             replacement = "";
         }
 
-        int charIndex = 0;|\Suppressnumber|
-        $\displaystyle \textbf{1}\;\Delta\;$int charIndex = 1;
-        
-        |\Reactivatenumber|
+        int charIndex = 0;
         boolean underEscapeMode = false;
         boolean erased;
         boolean delimiterMode= StringUtils.getDelimiterMode(delimiter, inside);
-        while (charIndex < sbPattern.length()){|\Suppressnumber|
-        $\displaystyle \textbf{2}\;\Delta\;$ while (charIndex <= sbPattern.length()){|\Reactivatenumber|
+        while (charIndex < sbPattern.length()){
             if(underEscapeMode){
                 underEscapeMode = false;
                 charIndex++;
@@ -82,8 +43,7 @@ public class StringUtils {
                     sbPattern.deleteCharAt(charIndex);
                     erased = true;
                 }
-                if(delimiterMode && (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){|\Suppressnumber|
-                $\displaystyle \textbf{3}\;\Delta\;$ if(delimiterMode $\displaystyle ||$ (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){|\Reactivatenumber|
+                if(delimiterMode && (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){
                     sbPattern.deleteCharAt(charIndex);
                     erased = true;
                 }
@@ -110,8 +70,7 @@ public class StringUtils {
             ArrayList<Integer> startingPoints = new ArrayList<>();
             ArrayList<Integer> endingPoints = new ArrayList<>();
             boolean start = true;
-            for (int i = 0; i < sbInput.length(); i++){|\Suppressnumber|
-            $\displaystyle \textbf{5}\;\Delta\;$ for (int i = 1; i < sbInput.length(); i++){|\Reactivatenumber|
+            for (int i = 1; i < sbInput.length(); i++){
                 Character currentChar = sbInput.charAt(i);
                 if(Character.compare(delimiter, currentChar) == 0){
                     if(start) {
@@ -120,8 +79,7 @@ public class StringUtils {
                     }
                     else{
                         endingPoints.add(i);
-                        start = true;|\Suppressnumber|
-                        $\displaystyle \textbf{6}\;\Delta\;$ // start = true;|\Reactivatenumber|
+                        start = true;
                     }
                 }
             }
@@ -142,8 +100,7 @@ public class StringUtils {
                 int oldLen;
                 if(inside){
                     for (int i=0; i<startingPoints.size(); i++){
-                        if(startingPoints.get(i)+1 < endingPoints.get(i)){|\Suppressnumber|
-                        $\displaystyle \textbf{4}\;\Delta\;$ if(startingPoints.get(i)+1 <= endingPoints.get(i)){|\Reactivatenumber|
+                        if(startingPoints.get(i)+1 < endingPoints.get(i)){
                             oldLen = sbInput.length();
                             if(doMatch(sbInput, sbPattern,replacement,startingPoints.get(i)+1, endingPoints.get(i))){
                                 replaceDone = true;
@@ -254,6 +211,3 @@ public class StringUtils {
     }
 
 }
-\end{lstlisting}
-
-\end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2015.9.10)  20 MAR 2016 15:54
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2015.9.10)  20 MAR 2016 22:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -102,22 +102,23 @@ LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
  [2] [3] [4] [5]
 [6] [7] (./mutations.aux) ) 
 Here is how much of TeX's memory you used:
- 1654 strings out of 495063
- 23200 string characters out of 3182201
+ 1656 strings out of 495063
+ 23221 string characters out of 3182201
  183464 words of memory out of 3000000
- 4886 multiletter control sequences out of 15000+200000
- 6983 words of font info for 25 fonts, out of 3000000 for 9000
+ 4887 multiletter control sequences out of 15000+200000
+ 7329 words of font info for 26 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 26i,6n,40p,238b,1646s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 26i,6n,40p,238b,1644s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 r10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on mutations.pdf (7 pages, 73699 bytes).
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on mutations.pdf (7 pages, 83770 bytes).
 PDF statistics:
- 48 PDF objects out of 1000 (max. 8388607)
- 33 compressed objects within 1 object stream
+ 52 PDF objects out of 1000 (max. 8388607)
+ 36 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

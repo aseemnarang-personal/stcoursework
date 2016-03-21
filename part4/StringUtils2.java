@@ -1,41 +1,6 @@
-\documentclass{article}
-
-\usepackage{listings}
-
-\lstset{numbers=left,numberblanklines=false,escapeinside=||,mathescape=true,language=Java,breaklines=true}
-\let\origthelstnumber\thelstnumber
-\makeatletter
-\newcommand*\Suppressnumber{%
-  \lst@AddToHook{OnNewLine}{%
-    \let\thelstnumber\relax%
-     \advance\c@lstnumber-\@ne\relax%
-    }%
-}
-
-\newcommand*\Reactivatenumber{%
-  \lst@AddToHook{OnNewLine}{%
-   \let\thelstnumber\origthelstnumber%
-   \advance\c@lstnumber\@ne\relax}%
-}
-
-
-\makeatother
-
-\begin{document}
-
-\title{Mutations of StringUtils}
-\date{}
-\maketitle
-
-\begin{lstlisting}
 import java.util.ArrayList;
 
-public class StringUtils {
-
-    public static void main(String[] args){
-	
-
-    }
+public class StringUtils2 {
 
     private static volatile char escape = 'e';
 
@@ -44,11 +9,11 @@ public class StringUtils {
     }
 
     public static void setEscape(char escape) {
-        StringUtils.escape = escape;
+        StringUtils2.escape = escape;
     }
 
     public static String replaceString(String inputText, String pattern, String replacement, Character delimiter, boolean inside) throws RuntimeException{
-        if(!StringUtils.getMatchingStatus(inputText, pattern)){
+        if(!StringUtils2.getMatchingStatus(inputText, pattern)){
             return inputText;
         }
         StringBuilder sbInput = new StringBuilder(inputText);
@@ -62,28 +27,23 @@ public class StringUtils {
             replacement = "";
         }
 
-        int charIndex = 0;|\Suppressnumber|
-        $\displaystyle \textbf{1}\;\Delta\;$int charIndex = 1;
-        
-        |\Reactivatenumber|
+        int charIndex = 0;
         boolean underEscapeMode = false;
         boolean erased;
-        boolean delimiterMode= StringUtils.getDelimiterMode(delimiter, inside);
-        while (charIndex < sbPattern.length()){|\Suppressnumber|
-        $\displaystyle \textbf{2}\;\Delta\;$ while (charIndex <= sbPattern.length()){|\Reactivatenumber|
+        boolean delimiterMode= StringUtils2.getDelimiterMode(delimiter, inside);
+        while (charIndex < sbPattern.length()){
             if(underEscapeMode){
                 underEscapeMode = false;
                 charIndex++;
             }
             else{
                 erased = false;
-                if(Character.compare(sbPattern.charAt(charIndex), StringUtils.getEscape()) == 0){
+                if(Character.compare(sbPattern.charAt(charIndex), StringUtils2.getEscape()) == 0){
                     underEscapeMode = true;
                     sbPattern.deleteCharAt(charIndex);
                     erased = true;
                 }
-                if(delimiterMode && (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){|\Suppressnumber|
-                $\displaystyle \textbf{3}\;\Delta\;$ if(delimiterMode $\displaystyle ||$ (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){|\Reactivatenumber|
+                if(delimiterMode && (Character.compare(sbPattern.charAt(charIndex), delimiter) == 0) && !underEscapeMode){
                     sbPattern.deleteCharAt(charIndex);
                     erased = true;
                 }
@@ -110,8 +70,7 @@ public class StringUtils {
             ArrayList<Integer> startingPoints = new ArrayList<>();
             ArrayList<Integer> endingPoints = new ArrayList<>();
             boolean start = true;
-            for (int i = 0; i < sbInput.length(); i++){|\Suppressnumber|
-            $\displaystyle \textbf{5}\;\Delta\;$ for (int i = 1; i < sbInput.length(); i++){|\Reactivatenumber|
+            for (int i = 0; i < sbInput.length(); i++){
                 Character currentChar = sbInput.charAt(i);
                 if(Character.compare(delimiter, currentChar) == 0){
                     if(start) {
@@ -120,8 +79,7 @@ public class StringUtils {
                     }
                     else{
                         endingPoints.add(i);
-                        start = true;|\Suppressnumber|
-                        $\displaystyle \textbf{6}\;\Delta\;$ // start = true;|\Reactivatenumber|
+                        start = true;
                     }
                 }
             }
@@ -130,7 +88,7 @@ public class StringUtils {
                     return sbInput.toString();
                 }
                 else{
-                    StringUtils.doMatch(sbInput, sbPattern, replacement, 0, sbInput.length());
+                    StringUtils2.doMatch(sbInput, sbPattern, replacement, 0, sbInput.length());
                     return sbInput.toString();
                 }
             }
@@ -138,20 +96,15 @@ public class StringUtils {
                 if(startingPoints.get(startingPoints.size()-1) > endingPoints.get(endingPoints.size()-1)){
                     startingPoints.remove(startingPoints.size()-1);
                 }
-                boolean replaceDone = false;
-                int oldLen;
                 if(inside){
                     for (int i=0; i<startingPoints.size(); i++){
-                        if(startingPoints.get(i)+1 < endingPoints.get(i)){|\Suppressnumber|
-                        $\displaystyle \textbf{4}\;\Delta\;$ if(startingPoints.get(i)+1 <= endingPoints.get(i)){|\Reactivatenumber|
-                            oldLen = sbInput.length();
+                        if(startingPoints.get(i)+1 < endingPoints.get(i)){
                             if(doMatch(sbInput, sbPattern,replacement,startingPoints.get(i)+1, endingPoints.get(i))){
-                                replaceDone = true;
-                                updatePoints(startingPoints, endingPoints, startingPoints.get(i), sbInput.length() - oldLen);
+                                return sbInput.toString();
                             }
                         }
                     }
-                    if(!replaceDone && (startingPoints.get(0)+1 < endingPoints.get(endingPoints.size()-1))){
+                    if(startingPoints.get(0)+1 < endingPoints.get(endingPoints.size()-1)){
                         doMatch(sbInput, sbPattern, replacement, startingPoints.get(0)+1, endingPoints.get(endingPoints.size()-1));
                     }
                 }
@@ -160,34 +113,30 @@ public class StringUtils {
                     int endIndex;
                     if(startingPoints.get(0) > 0){
                         startIndex = 0;
-                        oldLen = sbInput.length();
                         if(doMatch(sbInput, sbPattern,replacement,0, startingPoints.get(0))) {
-                            replaceDone = true;
-                            updatePoints(startingPoints, endingPoints, 0, sbInput.length() - oldLen);
+                            return sbInput.toString();
                         }
                     }
                     else{
                         startIndex = endingPoints.get(0)+1;
                     }
+                    for(int i=0; i<endingPoints.size()-1; i++){
+                        if(endingPoints.get(i)+1 < startingPoints.get(i+1)){
+                            if(doMatch(sbInput, sbPattern,replacement,endingPoints.get(i)+1, startingPoints.get(i+1))){
+                                return sbInput.toString();
+                            }
+                        }
+                    }
                     if(endingPoints.get(endingPoints.size()-1)+1 < sbInput.length()){
                         endIndex = sbInput.length();
                         if(doMatch(sbInput, sbPattern,replacement, endingPoints.get(endingPoints.size()-1)+1, sbInput.length())) {
-                            replaceDone = true;
+                            return sbInput.toString();
                         }
                     }
                     else{
                         endIndex = startingPoints.get(startingPoints.size()-1) -1 ;
                     }
-                    for(int i=0; i<endingPoints.size()-1; i++){
-                        if(endingPoints.get(i)+1 < startingPoints.get(i+1)){
-                            oldLen = sbInput.length();
-                            if(doMatch(sbInput, sbPattern,replacement,endingPoints.get(i)+1, startingPoints.get(i+1))){
-                                replaceDone = true;
-                                updatePoints(startingPoints, endingPoints, endingPoints.get(i), sbInput.length() - oldLen);
-                            }
-                        }
-                    }
-                    if(!replaceDone && (startIndex < endIndex)){
+                    if(startIndex < endIndex){
                         doMatch(sbInput, sbPattern, replacement, startIndex, endIndex);
                     }
                 }
@@ -195,14 +144,14 @@ public class StringUtils {
             }
         }
         else{
-            StringUtils.doMatch(sbInput, sbPattern, replacement, 0, sbInput.length());
+            StringUtils2.doMatch(sbInput, sbPattern, replacement, 0, sbInput.length());
             return sbInput.toString();
         }
     }
 
     private static boolean doMatch(StringBuilder input, StringBuilder pattern, String replace, Integer start, Integer end){
         String sub = input.substring(start, end);
-        String newSub = StringUtils.replaceAll(sub, pattern.toString(), replace);
+        String newSub = StringUtils2.replaceAll(sub, pattern.toString(), replace);
         if(sub.equals(newSub)){
             return false;
         }
@@ -224,17 +173,6 @@ public class StringUtils {
         return builder.toString();
     }
 
-    private static void updatePoints(ArrayList<Integer> startingPoints, ArrayList<Integer> endingPoints, int index, int diff){
-        for(int i=0; i<startingPoints.size(); i++){
-            if(startingPoints.get(i) > index){
-                startingPoints.set(i, startingPoints.get(i) + diff);
-            }
-            if(endingPoints.get(i) > index){
-                endingPoints.set(i, endingPoints.get(i) + diff);
-            }
-        }
-    }
-
     private static Boolean getDelimiterMode(Character delimiterChar, Boolean insideFlag) throws RuntimeException{
         if(delimiterChar == null){
             if(insideFlag){
@@ -252,8 +190,6 @@ public class StringUtils {
     private static boolean isNullOrEmpty(String str){
         return ((str == null) || (str.isEmpty()));
     }
-
 }
-\end{lstlisting}
 
-\end{document}
+

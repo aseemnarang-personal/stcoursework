@@ -1,0 +1,160 @@
+###########################################
+#                                         #
+#                                         #
+# StringUtils.replaceString Specification #
+#                                         #
+#                                         #
+###########################################
+
+Overview: The function searches the input text for a specific pattern occuring inside or outside atomic regions (see definition below) and replaces some occurences (see spec8 and spec9) with a replacement text. The changes introduced in this version are specs 8 and 9 that specifies that all occurences of the pattern are replaced in the first matched region only and not #all# matched regions. 
+
+atomic region definition: an atomic region is determined by a delimiter and is defined to be a continuous text area for which:
+       	       1 - There is an odd number of delimiters that precede it which are not part of the atomic region.
+	       2 - There is at least one delimiter that follows it which is not part of the atomic region.
+	       3 - There are no occurences of the delimeter inside the atomic region.
+	       4 - Can be the empty string.
+
+#####################################
+#                                   #
+#Start of atomic region example     #
+#                                   #
+#####################################
+Given the following:
+      - Delimiter: "
+      - Text: abcd"efghij"klmno"pqr"stuv"wxyz
+
+The atomic regions in the Text are:
+    1 - efghij
+    2 - pqr
+#####################################
+#                                   #
+#End of atomic region example       #
+#                                   #
+#####################################
+
+arguments:
+	arg1 - inputText : The text where the search will take place.
+	arg2 - pattern : The pattern which will be matched against the inputText.
+	arg3 - replacement : The text which will replace all pattern matches.
+	arg4 - delimiter: The delimiter that will define the atomic regions of the inputText.
+	arg5 - inside : A flag which defines if the search should be done inside or outside the atomic regions of the inputText.
+
+specifications:
+	spec1 - If inputText and/or pattern are NULL then the value of inputText is returned. 
+	
+	spec2 - The use of Backslash as an escape character causes undefined behaviour.
+
+	spec3 - Null delimiter in combination with active inside flag causes undefined behaviour.
+
+	spec4 - The pattern string can only contain escaped delimiter characters (i.e. delimiter characters for which the previous character is the escape character.). All non-escaped delimiter characters in pattern string should be removed before any matching takes place.
+
+	spec5 - The escape character can be the same with the delimiter character.
+
+	spec6 - When a region is matched against the pattern, the search in that region is done in a left-to-right fassion.
+
+	spec7 - In the case that the pattern is not found in ANY of the regions searched (i.e. the atomic regions if the inside flag is on OR the non-atomic regions if the inside flag is off) in the inputText, the function tries to identify the composite region (see definition below) of the inputText and matches the pattern against the text region that is inside or outside it, depending again on the inside flag.
+
+	spec8 - When the pattern is found in a region, all occurences of the pattern in THAT region are replaced and the search stops (i.e. pattern occurences in other regions do not get replaced).
+
+	spec9 - The regions that should be searched (atomic regions if the inside flag is on, non-atomic regions otherwise) are processed in a left-to-right fassion.
+
+
+
+########################################
+#                                      #
+#Start of spec4 example                #
+#                                      #
+########################################
+Given the following:
+      - Escape character: \
+      - Delimiter character: "
+      - Pattern: This is the \"pattern" string 
+
+The pattern after the removal of the non-escaped characters is:
+    - This is the "pattern string
+########################################
+#                                      #
+#End of spec4 example                  #
+#                                      #
+########################################
+
+########################################
+#                                      #
+#Start of spec5 example                #
+#                                      #
+########################################
+Given the folloing:
+      - Escape character: \
+      - Delimiter character: \
+      - Pattern: Thi\s is t\\he pattern strin\\\g
+
+The pattern after the removal of the non-escaped characters is:
+    - This is t\he pattern strin\g  
+########################################
+#                                      #
+#End of spec5 region example           #
+#                                      #
+########################################
+
+########################################
+#                                      #
+#Start of spec6 example                #
+#                                      #
+########################################
+Given the following:
+      - Atomic (or composite) region: xyzabababaxyz
+      - Pattern: aba
+      - Replacement: fog
+
+The atomic (or composite) region after the matching and replacement is:
+    - xyzfogbfogxyz
+########################################
+#                                      #
+#End of spec6 example                  #
+#                                      #
+########################################
+
+########################################
+#                                      #
+#Start of spec8 and spec9 example      #
+#                                      #
+########################################
+Given the following:
+      - Input text: abc"fooxyzfoo"randomstuff"fooxyz"abc
+      - Pattern: foo
+      - Replacement: bar 
+      - Delimiter character: "
+      - Inside flag: ON
+
+Then the result of the replaceString method should be:
+     - abc"barxyzbar"randomstuff"fooxyz"abc
+########################################
+#                                      #
+#End of spec8 and spec9 example        #
+#                                      #
+########################################
+
+composite region definition: a composite region is determined by the same delimiter as the atomic regions and has the following properties:
+	  1 - There is exactly one delimiter that precedes it which is not part of the composite region.
+	  2 - There is exactly one delimiter that follows it which is not part of the composite region.
+	  3 - Can be the empty string.
+	  4 - For a not Null inputText and a not Null delimiter there can be either zero or one composite region.
+	  5 - Every other occurence of the delimiter inside the composite region is treated as normal text.
+
+########################################
+#                                      #
+#Start of composite region example     #
+#                                      #
+########################################
+Given the following:
+      - Delimiter: "
+      - Text: abcd"efghij"klmno"pqr"stuv"wxyz
+
+The composite region in Text is:
+    1 - efghij"klmno"pqr"stuv
+########################################
+#                                      #
+#End of composite region example       #
+#                                      #
+########################################
+
