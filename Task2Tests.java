@@ -6,11 +6,10 @@ import static org.junit.Assert.*;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
-
 /**
  * Created by s1338673 on 19/03/16.
  */
-public class StringUtilsTest {
+public class Task2Tests {
 
 
     // Normal case, input greater than pattern
@@ -19,8 +18,7 @@ public class StringUtilsTest {
     //replace: multiple chars
     //delimeter: special char
     @Test
-    public void testitf1()
-    {
+    public void testitf1() {
         StringUtils stringutils = new StringUtils();
         String input = "THIS #IS TEST# CASE";
         String pattern = "TE";
@@ -31,10 +29,9 @@ public class StringUtilsTest {
         String expected = "THIS #IS BEST# CASE";
         //System.out.print(output);
         boolean ans = output.equals(expected);
-        assertEquals(ans , true);
+        assertEquals(ans, true);
 
     }
-
 
 
     //categories: input: non empty with multiple atomic region
@@ -42,7 +39,7 @@ public class StringUtilsTest {
     //replace: multiple
     //delimeter: special char
     @Test
-    public void testitf2() {
+    public void testitf4() {
         StringUtils stringutils = new StringUtils();
         String input = "THIS #IS# TEST #IS# CASE";
         String pattern = "I";
@@ -53,7 +50,7 @@ public class StringUtilsTest {
         String expected = "THIS #XYZS# TEST #XYZS# CASE";
         //System.out.print(output);
         boolean ans = output.equals(expected);
-        assertEquals(ans , true);
+        assertEquals(ans, true);
 
     }
 
@@ -64,7 +61,7 @@ public class StringUtilsTest {
     //pattern and input are same
 
     @Test
-    public void testitf3() {
+    public void testitf6() {
         StringUtils stringutils = new StringUtils();
         String input = "THIS #IS# TEST #THE# CASE";
         String pattern = "I";
@@ -75,16 +72,17 @@ public class StringUtilsTest {
         String expected = "THIS #XYZS# TEST #THE# CASE";
         //System.out.print(output);
         boolean ans = output.equals(expected);
-        assertEquals(ans , true);
+        assertEquals(ans, true);
 
     }
+
     //categories: input: non empty
     //pattern: same as input
     //replace: multiple
     //delimeter: special char
     //pattern and input are same
     @Test
-    public void testitf4() {
+    public void testitf7() {
         StringUtils stringutils = new StringUtils();
         String input = "#TEST#";
         String pattern = "TEST";
@@ -95,7 +93,7 @@ public class StringUtilsTest {
         String expected = "#Asdf#";
         //System.out.print(output);
         boolean ans = output.equals(expected);
-        assertEquals(ans , true);
+        assertEquals(ans, true);
 
     }
 
@@ -105,7 +103,7 @@ public class StringUtilsTest {
     //delimeter: special char
     //Replace is empty string
     @Test
-    public void testitf5() {
+    public void testitf8() {
         StringUtils stringutils = new StringUtils();
         String input = "THIS #TEST# CASE";
         String pattern = "TE";
@@ -115,7 +113,7 @@ public class StringUtilsTest {
         String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
         String expected = "THIS #ST# CASE";
         boolean ans = output.equals(expected);
-        assertEquals(ans , true);
+        assertEquals(ans, true);
 
     }
 
@@ -125,7 +123,7 @@ public class StringUtilsTest {
     //delimeter: escape char
     //Backslash is the delimiter, search and replace within atomic region. SPEC 5
     @Test
-    public void testitf6() {
+    public void testitf9() {
         StringUtils stringutils = new StringUtils();
         String input = "\\#THIS #TEST# CASE\\#";
         String pattern = "TE";
@@ -145,7 +143,7 @@ public class StringUtilsTest {
     //delimeter: special char
     //Multiple replaces within the same region
     @Test
-    public void testitf7() {
+    public void testitf10() {
         StringUtils stringutils = new StringUtils();
         String input = "THIS #IS IN #TEST CASE";
         String pattern = "I";
@@ -158,13 +156,14 @@ public class StringUtilsTest {
         boolean ans = output.equals(expected);
         assertEquals(ans, true);
     }
+
     //categories: input: non empty
     //pattern: multiple chars, present in input multiple times is multiple region
     //replace: multiple
     //delimeter: special char
     //Multiple replaces within Multiple region
     @Test
-    public void testitf8() {
+    public void testitf11() {
         StringUtils stringutils = new StringUtils();
         String input = "THIS #IS IN# TEST #IS IM# CASE";
         String pattern = "I";
@@ -184,7 +183,7 @@ public class StringUtilsTest {
     //delimeter: alphabet
 
     @Test
-    public void testitf9() {
+    public void testitf14() {
         StringUtils stringutils = new StringUtils();
         String input = "THIS aIS THEa TEST CASE";
         String pattern = "IS";
@@ -204,7 +203,7 @@ public class StringUtilsTest {
     //delimeter: number
 
     @Test
-    public void testitf10() {
+    public void testitf15() {
         StringUtils stringutils = new StringUtils();
         String input = "THIS 1IS THE1 TEST CASE";
         String pattern = "IS";
@@ -218,14 +217,29 @@ public class StringUtilsTest {
         assertEquals(ans, true);
     }
 
+    @Test
+    public void testitf16() {
+        StringUtils stringutils = new StringUtils();
+        String input = "QUICK asd BROWN asd FOX asd JUMPED asd OVER THE YELLOW DOG";
+        String pattern = "asd";
+        String replace = "qwe";
+        char delimiter = '1';
+        boolean inside = false;
+        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
+        String expected = "QUICK qwe BROWN qwe FOX qwe JUMPED qwe OVER THE YELLOW DOG";
+        //System.out.print(output);
+        boolean ans = output.equals(expected);
+        assertEquals(ans, true);
+    }
+
 
     //categories: input: 3 atomic regions
     //pattern: single chars
     //replace: multiple
     //delimeter: special char
 
-   /* @Test
-    public void testitf16() {
+    @Test
+    public void testitf17() {
         StringUtils stringutils = new StringUtils();
         String input = "THE #QUICK# BR#OWN FOX IS CL#E#VER I#N FORREST";
         String pattern = "I";
@@ -238,35 +252,57 @@ public class StringUtilsTest {
         boolean ans = output.equals(expected);
         assertEquals(ans, true);
     }
-*/
 
+    @Test
+    public void testitf18() {
+        StringUtils stringutils = new StringUtils();
+        String input = "#THIS IS TEST# #IS # TEST CASE#";
+        String pattern = "TE";
+        String replace = "BE";
+        char delimiter = '#';
+        boolean inside = true;
+        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
+        String expected = "#THIS IS BEST# #IS # TEST CASE#";
+        //System.out.print(output);
+        boolean ans = output.equals(expected);
+        assertEquals(ans, true);
 
+    }
 
+    //inside set to false, pattern found outside atomic region
+    @Test
+    public void testitf19() {
+        StringUtils stringutils = new StringUtils();
+        String input = "THIS IS TEST# IS # TEST CASE";
+        String pattern = "TE";
+        String replace = "BE";
+        char delimiter = '#';
+        boolean inside = false;
+        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
+        String expected = "THIS IS BEST# IS # BEST CASE";
+        //System.out.print(output);
+        boolean ans = output.equals(expected);
+        assertEquals(ans, true);
 
+    }
 
+    //inside set to false, one pattern found outside atomic region one inside
+    @Test
+    public void testitf20() {
+        StringUtils stringutils = new StringUtils();
+        String input = "THIS IS TEST# IS # #TEST# CASE";
+        String pattern = "TE";
+        String replace = "BE";
+        char delimiter = '#';
+        boolean inside = false;
+        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
+        String expected = "THIS IS BEST# IS # #TEST# CASE";
+        //System.out.print(output);
+        boolean ans = output.equals(expected);
+        assertEquals(ans, true);
 
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*//TODO: REMOVE
     //pattern bigger than input
     @Test
     public void testitf13() {
@@ -281,99 +317,25 @@ public class StringUtilsTest {
         //System.out.print(output);
         boolean ans = output.equals(expected);
         assertEquals(ans, true);
-    }*/
+    }
 
-    //        boolean inside = false;
-//        char delimiter = '#';
-//        String replace = "BE";
-//        String pattern = "TE";
-//        String input = "TEST CASE";
-//        StringUtils stringutils = new StringUtils();
-//    public void testitf1() {
-//    }
-//
-//        assertEquals(ans , true);
-//        boolean ans = output.equals(expected);
-//        String expected = "BEST CASE";
-//        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
-//        boolean inside = false;
-//        char delimiter = '#';
-//        String replace = "BE";
-//        String pattern = "TE";
-//        String input = "TEST CASE";
-//        StringUtils stringutils = new StringUtils();
-//    public void testitf1() {
-//    }
-//
-//        assertEquals(ans , true);
-//        boolean ans = output.equals(expected);
-//        String expected = "BEST CASE";
-//        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
-//        boolean inside = false;
-//        char delimiter = '#';
-//        String replace = "BE";
-//        String pattern = "TE";
-//        String input = "TEST CASE";
-//        StringUtils stringutils = new StringUtils();
-//    }
-//
-//        assertEquals(ans , true);
-//        boolean ans = output.equals(expected);
-//        //System.out.print(output);
-//        String expected = "THIS #IS TEST# CASE";
-//        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
-//        boolean inside = true;
-//        char delimiter = '#';
-//        String replace = "BE";
-//        String pattern = "XYZ";
-//        String input = "THIS #IS TEST# CASE";
-//        StringUtils stringutils = new StringUtils();
-//    public void testitf3() {
-//    @Test
-//    //patter does not exist in input
-//    //TODO: REMOVE
-//    }
-//
-//        assertEquals(ans , true);
-//        boolean ans = output.equals(expected);
-//        String expected = "THIS #IS TEST# CASE";
-//        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
-//        boolean inside = true;
-//        char delimiter = '#';
-//        String replace = "BE";
-//        String pattern = "";
-//        String input = "THIS #IS TEST# CASE";
-//        StringUtils stringutils = new StringUtils();
-//    public void testitf2() {
-//    @Test
-//    //delimeter: special char
-//    //replace: multiple
-//    //pattern empty
-//    //categories: input: non empty with one atomic region
-//categories: input: non empty, one atomic region
-//pattern: multiple chars,present
-//replace: multiple
-//delimeter: alphabet
-//Multiple replaces within the same region
-//Multiple replaces within Multiple region
 
-    //    //TODO: REMOVE
-//    //Multiple occurence of pattern in input string. pattern in no regions
-//    @Test
-//    public void testitf5() {
-//        StringUtils stringutils = new StringUtils();
-//        String input = "THIS #THE# TEST #THE# CASE";
-//        String pattern = "I";
-//        String replace = "XYZ";
-//        char delimiter = '#';
-//        boolean inside = true;
-//        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
-//        String expected = "THIS #THE# TEST #THE# CASE";
-//        //System.out.print(output);
-//        boolean ans = output.equals(expected);
-//        assertEquals(ans , true);
-//
-//    }
+    //Multiple occurence of pattern in input string. pattern in no regions
+    @Test
+    public void testitf5() {
+        StringUtils stringutils = new StringUtils();
+        String input = "THIS #THE# TEST #THE# CASE";
+        String pattern = "I";
+        String replace = "XYZ";
+        char delimiter = '#';
+        boolean inside = true;
+        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
+        String expected = "THIS #THE# TEST #THE# CASE";
+        //System.out.print(output);
+        boolean ans = output.equals(expected);
+        assertEquals(ans , true);
+
+    }
     //categories: input: non empty with multiple atomic region
     //pattern single char, present in one region
     //replace: multiple
@@ -381,8 +343,6 @@ public class StringUtilsTest {
     //Multiple occurence of pattern in input string. pattern in one regions
 
 
-
-    /*//TODO:REMOVE
     //pattern only found outside atomic area
     @Test
     public void testitf12() {
@@ -397,80 +357,57 @@ public class StringUtilsTest {
         //System.out.print(output);
         boolean ans = output.equals(expected);
         assertEquals(ans, true);
-    }*/
-
-    //    //TODO: REMOVE
-
-
-
-    //    public void testitf1() {
-//        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
-//        String expected = "BEST CASE";
-//        boolean ans = output.equals(expected);
-//        assertEquals(ans , true);
-//
-//    }
-//    public void testitf1() {
-//        StringUtils stringutils = new StringUtils();
-//        String input = "TEST CASE";
-//        String pattern = "TE";
-//        String replace = "BE";
-//        char delimiter = '#';
-//        boolean inside = false;
-//        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
-//        String expected = "BEST CASE";
-//        boolean ans = output.equals(expected);
-//        assertEquals(ans , true);
-//
-//    }
-//    public void testitf1() {
-//        StringUtils stringutils = new StringUtils();
-//        String input = "TEST CASE";
-//        String pattern = "TE";
-//        String replace = "BE";
-//        char delimiter = '#';
-//        boolean inside = false;
-//        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
-//        String expected = "BEST CASE";
-//        boolean ans = output.equals(expected);
-//        assertEquals(ans , true);
-//
-//    }
-
-
-
-
-
-    /*EmpBusinessLogic empBusinessLogic =new EmpBusinessLogic();
-    EmployeeDetails employee = new EmployeeDetails();
-
-    //test to check appraisal
-    @Test
-    public void testCalculateAppriasal() {
-        employee.setName("Rajeev");
-        employee.setAge(25);
-        employee.setMonthlySalary(8000);
-        double appraisal= empBusinessLogic.calculateAppraisal(employee);
-        assertEquals(500, appraisal, 0.0);
     }
 
-    // test to check yearly salary
+    //empty pattern
     @Test
-    public void testCalculateYearlySalary() {
-        employee.setName("Rajeev");
-        employee.setAge(25);
-        employee.setMonthlySalary(8000);
-        double salary= empBusinessLogic.calculateYearlySalary(employee);
-        assertEquals(96000, salary, 0.0);
-
-        String input = "Chris James Campbell";
-        String pattern = "Campbe";
-        String replace = "Dod";
+    public void testitf21() {
+        StringUtils stringutils = new StringUtils();
+        String input = "THIS #IS# TEST CASE";
+        String pattern = "";
+        String replace = "ABC";
         char delimiter = ' ';
-        boolean inside = false;
+        boolean inside = true;
+        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
+        String expected = "THIS #IS# TEST CASE";
+        //System.out.print(output);
+        boolean ans = output.equals(expected);
+        assertEquals(ans, true);
+    }
+
+    //empty input text and pattern
+    @Test
+    public void testitf22() {
+        StringUtils stringutils = new StringUtils();
+        String input = "";
+        String pattern = "";
+        String replace = null;
+        char delimiter = ' ';
+        boolean inside = true;
+        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
+        String expected = "";
+        //System.out.print(output);
+        boolean ans = output.equals(expected);
+        assertEquals(ans, true);
+    }
+
+//    @Test
+//    public void testitf23() {
+//        StringUtils stringutils = new StringUtils();
+//        String input = "Thi\\s is t\\\\he pattern strin\\\\\\g";
+//        String pattern = "This is t\\he pattern strin\\g";
+//        String replace = null;
+//        char delimiter = '\\';
+//        boolean inside = true;
+//        String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
+//        String expected = "This is t\\he pattern strin\\g";
+//        //System.out.print(output);
+//        boolean ans = output.equals(expected);
+//        assertEquals(ans, true);
+//    }
 
 
-        */
+
+
 
 }
-

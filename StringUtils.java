@@ -1,5 +1,5 @@
 /**
- * Created by s1338673 on 19/03/16.
+ * Created by s1368177 on 19/03/16.
  */
 import java.util.ArrayList;
 
@@ -30,8 +30,7 @@ public class StringUtils {
             replacement = "";
         }
 
-        //int charIndex = 0;   // MUTATION 1
-        int charIndex = 1;
+        int charIndex = 0;
         boolean underEscapeMode = false;
         boolean erased;
         boolean delimiterMode= StringUtils.getDelimiterMode(delimiter, inside);
@@ -74,7 +73,6 @@ public class StringUtils {
             ArrayList<Integer> startingPoints = new ArrayList<>();
             ArrayList<Integer> endingPoints = new ArrayList<>();
             boolean start = true;
-            //for (int i = 1; i < sbInput.length(); i++){ //- 5th  MUTATION
             for (int i = 0; i < sbInput.length(); i++){
                 Character currentChar = sbInput.charAt(i);
                 if(Character.compare(delimiter, currentChar) == 0){
@@ -85,7 +83,6 @@ public class StringUtils {
                     else{
                         endingPoints.add(i);
                         start = true;
-                        //remove above statement - 6 MUTATION
                     }
                 }
             }
@@ -105,8 +102,7 @@ public class StringUtils {
                 boolean replaceDone = false;
                 int oldLen;
                 if(inside){
-                    //for (int i=0; i<startingPoints.size(); i = i+2){  //4th Mutation
-                    for (int i=0; i<startingPoints.size(); i = i++){
+                    for (int i=0; i<startingPoints.size(); i++){
                         if(startingPoints.get(i)+1 < endingPoints.get(i)){
                             oldLen = sbInput.length();
                             if(doMatch(sbInput, sbPattern,replacement,startingPoints.get(i)+1, endingPoints.get(i))){
@@ -216,17 +212,16 @@ public class StringUtils {
     private static boolean isNullOrEmpty(String str){
         return ((str == null) || (str.isEmpty()));
     }
+//
+//    public static void main(String[] args)
+//    {
+//        String input = "Chris James Campbell";
+//        String pattern = "Cam";
+//        String replace = "Dod";
+//        char delimiter = ' ';
+//        boolean inside = false;
+//
+//        System.out.format("The replaced string is: %s\n", replaceString(input, pattern, replace, delimiter, inside));
+//    }
 
-    public static void main(String[] args)
-    {
-        String input = "Chris James Campbell";
-        String pattern = "Ca";
-        String replace = "D";
-        char delimiter = ' ';
-        boolean inside = false;
-
-        System.out.format("The replaced string is: %s\n", replaceString(input, pattern, replace, delimiter, inside));
-    }
 }
-
-
