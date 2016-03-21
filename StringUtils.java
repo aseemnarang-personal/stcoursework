@@ -30,7 +30,8 @@ public class StringUtils {
             replacement = "";
         }
 
-        int charIndex = 0;
+        //int charIndex = 0;   // MUTATION 1
+        int charIndex = 1;
         boolean underEscapeMode = false;
         boolean erased;
         boolean delimiterMode= StringUtils.getDelimiterMode(delimiter, inside);
@@ -73,7 +74,7 @@ public class StringUtils {
             ArrayList<Integer> startingPoints = new ArrayList<>();
             ArrayList<Integer> endingPoints = new ArrayList<>();
             boolean start = true;
-            //for (int i = 1; i < sbInput.length(); i++) - 5th  MUTATION
+            //for (int i = 1; i < sbInput.length(); i++){ //- 5th  MUTATION
             for (int i = 0; i < sbInput.length(); i++){
                 Character currentChar = sbInput.charAt(i);
                 if(Character.compare(delimiter, currentChar) == 0){
@@ -104,7 +105,8 @@ public class StringUtils {
                 boolean replaceDone = false;
                 int oldLen;
                 if(inside){
-                    for (int i=0; i<startingPoints.size(); i++){
+                    //for (int i=0; i<startingPoints.size(); i = i+2){  //4th Mutation
+                    for (int i=0; i<startingPoints.size(); i = i++){
                         if(startingPoints.get(i)+1 < endingPoints.get(i)){
                             oldLen = sbInput.length();
                             if(doMatch(sbInput, sbPattern,replacement,startingPoints.get(i)+1, endingPoints.get(i))){
@@ -218,8 +220,8 @@ public class StringUtils {
     public static void main(String[] args)
     {
         String input = "Chris James Campbell";
-        String pattern = "Campbe";
-        String replace = "Dod";
+        String pattern = "Ca";
+        String replace = "D";
         char delimiter = ' ';
         boolean inside = false;
 
