@@ -142,8 +142,8 @@ public class StringUtils {
                 int oldLen;
                 if(inside){
                     for (int i=0; i<startingPoints.size(); i++){
-                        if(startingPoints.get(i)+1 < endingPoints.get(i)){|\Suppressnumber|
-                        $\displaystyle \textbf{4}\;\Delta\;$ if(startingPoints.get(i)+1 <= endingPoints.get(i)){|\Reactivatenumber|
+                    $\displaystyle \textbf{4}\;\Delta\; $ for (int i=0; i<startingPoints.size(); i+2){
+                        if(startingPoints.get(i)+1 < endingPoints.get(i)){
                             oldLen = sbInput.length();
                             if(doMatch(sbInput, sbPattern,replacement,startingPoints.get(i)+1, endingPoints.get(i))){
                                 replaceDone = true;

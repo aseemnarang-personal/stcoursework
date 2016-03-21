@@ -1,13 +1,6 @@
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.*;
 
 public class StringUtils {
-
-    public static void main(String[] args){
-	
-
-    }
 
     private static volatile char escape = 'e';
 
@@ -38,7 +31,7 @@ public class StringUtils {
         boolean underEscapeMode = false;
         boolean erased;
         boolean delimiterMode= StringUtils.getDelimiterMode(delimiter, inside);
-        while (charIndex > sbPattern.length()){
+        while (charIndex < sbPattern.length()){
             if(underEscapeMode){
                 underEscapeMode = false;
                 charIndex++;
@@ -106,8 +99,8 @@ public class StringUtils {
                 boolean replaceDone = false;
                 int oldLen;
                 if(inside){
-                    for (int i=0; i<startingPoints.size(); i++){
-                        if(startingPoints.get(i)+1 <= endingPoints.get(i)){
+                    for (int i=0; i<startingPoints.size(); i + 2){
+                        if(startingPoints.get(i)+1 < endingPoints.get(i)){
                             oldLen = sbInput.length();
                             if(doMatch(sbInput, sbPattern,replacement,startingPoints.get(i)+1, endingPoints.get(i))){
                                 replaceDone = true;
