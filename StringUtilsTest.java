@@ -66,13 +66,13 @@ public class StringUtilsTest {
     @Test
     public void testitf3() {
         StringUtils stringutils = new StringUtils();
-        String input = "THIS #IS# TEST #THE# CASE";
+        String input = "THIS #ISI# TEST #THE# CASE";
         String pattern = "I";
         String replace = "XYZ";
         char delimiter = '#';
         boolean inside = true;
         String output = stringutils.replaceString(input, pattern, replace, delimiter, inside);
-        String expected = "THIS #XYZS# TEST #THE# CASE";
+        String expected = "THIS #XYZSXYZ# TEST #THE# CASE";
         //System.out.print(output);
         boolean ans = output.equals(expected);
         assertEquals(ans , true);
